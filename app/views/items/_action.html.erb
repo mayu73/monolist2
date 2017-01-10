@@ -1,5 +1,5 @@
 <div class="action">
-  <% if current_user.want? item %>
+  <% if current_user.want? item: item %>
     <%= render 'items/unwant' , item: item %>
   <% else %>
     <%= render 'items/want' , item: item %>

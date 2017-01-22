@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="container-inner inner-default clearfix">
+    <% @items.each_with_index do |item, i| %>
+      <%
+      if i == 0 
+        current_rank = i+1
+      elsif( @items[i-1].haves_count == item.haves_count )
+        current_rank = i
+      else
+        current_rank = i+1
+      end 
+      %>
+      <div class="item-box ranking">
+        <div class="item-ranking">
+          <%= current_rank %>位
+        </div>
+        <div class="image">
+          <div class="img-wrap">
+            <% if item.large_image.present? %>
+              <%= image_tag(item.large_image , alt: item.title) %>
+            <% else %>
+              <%= image_tag("no-image.png" , alt: item.title) %>
+            <% end %>
+          </div>
+        </div>
+        <div class="detail">
+          <p class="title">
+            <%= item.title %>
+          </p>
+        </div>
+        <%= render 'items/action' , item: item if logged_in? %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :head do %>
+  <title>Haveランキング-monolist</title>
+  <meta name="description" content="Haveランキングを表示しています。" />
+<% end %>

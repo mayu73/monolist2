@@ -10,7 +10,7 @@ class RankingController < ApplicationController
     def want
       @items = Item.joins(:wants)
       .select("items.*","count(ownerships.id) as wants_count")
-      .group("items_id")
+      .group("items.id")
       .order("wants_count desc")
       .limit(10)
     end
